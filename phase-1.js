@@ -26,12 +26,12 @@ function liftWeights() {
 }
 
 function workout() {
-  // refactor this code to use Promise.all
-  stretch()
-    .then(runOnTreadmill)
-    .then(liftWeights)
-    .then(() => console.log("done working out"))
-    .catch((err) => console.log(err));
+  // run all promises simultaneously
+  Promise.all([stretch(), runOnTreadmill(), liftWeights()])
+    .then(() => {
+      console.log("done working out"); // runs once all promises are fulfilled
+    })
+    .catch((err) => console.error(err)); // catch any error if any promise rejects
 }
 
 
